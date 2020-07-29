@@ -1,4 +1,6 @@
 ﻿using System;
+using Student;
+
 
 namespace StudentCard
 {
@@ -6,7 +8,8 @@ namespace StudentCard
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            GetFIles student = new GetFIles();
+            student.Files();
         }
     }
 }
