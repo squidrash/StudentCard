@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Student
 {
-    public class GetFIles
+    public class GetFiles
     {
         public void Files()
         {
