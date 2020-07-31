@@ -10,19 +10,19 @@ namespace Student
             GetStudent student1 = new GetStudent();
             Console.WriteLine("Выберите студента:");
             student.Files();
-            string st = Console.ReadLine();            
-
-            switch (st)
-            {
-                case "ivan":                    
-                    student1.GetStudentInfo("/ivan.json");
-                    break;
-                case "nik":                    
-                    student1.GetStudentInfo("/nik.json");
-                    break;
-                default:
-                    break;
-            }
+            string st = Console.ReadLine();
+            student1.GetStudentInfo($"{st}.json");
+            //switch (st)
+            //{
+            //    case "ivan":                    
+            //        student1.GetStudentInfo("/ivan.json");
+            //        break;
+            //    case "nik":                    
+            //        student1.GetStudentInfo("/nik.json");
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
     }
 }

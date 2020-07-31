@@ -6,19 +6,19 @@ namespace Student
 {
     public class GetStudent
     {
-        public async void GetStudentInfo(string js)
+        public void GetStudentInfo(string js)
         {
-            string pathDir = "/Users/nikitarasevskij/Desktop/студенты С#";
-            FileInfo fileInf = new FileInfo($"{pathDir}{js}");
+            var filePath = Path.Combine("StudentCards", js); // объединение составных частей в единый путь с автоматическим разделением /
+            FileInfo fileInf = new FileInfo(filePath);
             if(fileInf.Exists)
             {
-                using (FileStream fs = File.OpenRead($"{pathDir}{js}"))
-                {
-                    StudentDTO studentDTO = await JsonSerializer.DeserializeAsync<StudentDTO>(fs);
-                    Console.WriteLine($"FIO: {studentDTO.FIO},\n Curriculum\nFaculty: {studentDTO.curriculum.Faculty},\nSpeciality: {studentDTO.curriculum.Speciality},\n" +
-                    $"Course: {studentDTO.curriculum.Course},\nGpoup: {studentDTO.curriculum.Group},\n Address\nCity: {studentDTO.address.City},\nPostIndex: {studentDTO.address.PostIndex},\n" +
-                    $"Street: {studentDTO.address.Street},\n Contact\nPhone: {studentDTO.contact.Phone},\nEmail: {studentDTO.contact.Email}");
-                }
+                var jsonText = File.ReadAllText(filePath);
+                
+                var studentDTO = JsonSerializer.Deserialize<StudentDTO>(jsonText);                
+                Console.WriteLine($"FIO: {studentDTO.FIO},\n Curriculum\nFaculty: {studentDTO.curriculum.Faculty},\nSpeciality: {studentDTO.curriculum.Speciality},\n" +
+                $"Course: {studentDTO.curriculum.Course},\nGpoup: {studentDTO.curriculum.Group},\n Address\nCity: {studentDTO.address.City},\nPostIndex: {studentDTO.address.PostIndex},\n" +
+                $"Street: {studentDTO.address.Street},\n Contact\nPhone: {studentDTO.contact.Phone},\nEmail: {studentDTO.contact.Email}");
+
             }
         }
     }

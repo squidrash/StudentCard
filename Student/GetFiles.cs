@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 
 namespace Student
 {
@@ -7,16 +8,21 @@ namespace Student
     {
         public void Files()
         {
-            string dirName = "/Users/nikitarasevskij/Desktop/студенты С#";
+            string dirName = "StudentCards";
             if (Directory.Exists(dirName))
             {
-                string[] files = Directory.GetFiles(dirName);
-                foreach(string s in files)
-                {
-                    FileInfo fl = new FileInfo(s);
-                    Console.WriteLine(fl.Name);
-                }
+                //string[] files = Directory.GetFiles(dirName);
 
+                var files = Directory.GetFiles(dirName)
+                    .Where(x => x.EndsWith(".json"))
+                    .Select(x => x.Replace("StudentCards/", ""))
+                    .Select(x => x.Replace(".json", ""));
+
+
+                foreach (string s in files)
+                {
+                    Console.WriteLine(s);
+                }
             }
         }
         
