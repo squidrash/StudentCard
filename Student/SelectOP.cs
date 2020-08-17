@@ -1,27 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Student
 {
     public class SelectOP
     {
-        public void Operation(int op)
-        {
+        public object Operation(int op)
+        {            
             switch(op)
             {
                 case 1:
                     GetFiles file = new GetFiles();
-                    file.Files();
-                    break;
+                    var f = file.Files();
+                    return f;
                 case 2:
                     StudentsInfo student = new StudentsInfo();
-                    student.StudentsIf();
-                    break;
-                case 99:
-                    break;
+                    var s = student.StudentsIf();
+                    return s;
+
+                //case 99:
+                //    break;
                 default:
-                    Console.WriteLine("Неверная команда!");
-                    break;
+                    throw new Exception("Неверная команда!");
+                    
             }
         }
     }

@@ -4,14 +4,15 @@ namespace Student
 {
     public class StudentsInfo
     {
-        public void StudentsIf()
+        public StudentDTO StudentsIf()
         {
             GetFiles student = new GetFiles();
             GetStudent student1 = new GetStudent();
             Console.WriteLine("Выберите студента:");
             student.Files();
             string st = Console.ReadLine();
-            student1.GetStudentInfo($"{st}.json");
+            var s = student1.GetStudentInfo($"{st}.json");
+            return s;
             //switch (st)
             //{
             //    case "ivan":                    
