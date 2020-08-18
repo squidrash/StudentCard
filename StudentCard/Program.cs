@@ -1,7 +1,7 @@
 ﻿using System;
 using Student;
 using System.Threading.Tasks;
-
+using System.Reflection;
 
 namespace StudentCard
 {
@@ -10,12 +10,24 @@ namespace StudentCard
         static void Main(string[] args)
         {
             while (true)
-            {                
+            {
+                //Type myType = typeof(StudentDTO);
+                //Console.ForegroundColor = ConsoleColor.DarkRed;
+                //foreach (PropertyInfo property in myType.GetProperties())
+                //{
+                //    Console.WriteLine($"{property.PropertyType.Name} {property.Name}");
+                //}
+                //Console.ForegroundColor = ConsoleColor.Blue;
+                //foreach (PropertyInfo property in myType.GetProperties())
+                //{
+                //    Console.WriteLine(property.Name);
+                //}
+
                 ConsoleColor color = Console.ForegroundColor;
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Список команд:");
                 Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("1. Cписок студентов\t2. Информация о студенте\t99. Выход из программы");
+                Console.WriteLine("1. Cписок студентов\t2. Информация о студенте\t3. Редактировать\t99. Выход из программы");
                 Console.ForegroundColor = color;
                 int op = Convert.ToInt32(Console.ReadLine());
                 
@@ -63,17 +75,21 @@ namespace StudentCard
                 //}
 
                 //через if
-                if(op == 1)
+                if (op == 1)
                 {
                     Operation1();
                 }
-                if(op == 2)
+                else if (op == 2)
                 {
                     Operation2();
+                }                
+                else
+                {
+                    Console.WriteLine("Неверная команда");
+                    //throw new Exception("Неверная команда");
                 }
                 void Operation1()
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
+                {                    
                     var f = file.Files();
                     Console.ForegroundColor = ConsoleColor.Green;
                     foreach (var r in f)
@@ -86,7 +102,14 @@ namespace StudentCard
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Выберите студента:");
-                    Operation1();
+                    var f = file.Files();
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    foreach (var r in f)
+                    {
+                        Console.WriteLine(r);
+                    }
+                    Console.ForegroundColor = color;
+
                     string st = Console.ReadLine();
 
                     Console.ForegroundColor = ConsoleColor.Green;
@@ -95,9 +118,7 @@ namespace StudentCard
                     $"Course: {s.curriculum.Course},\nGpoup: {s.curriculum.Group},\n Address\nCity: {s.address.City},\nPostIndex: {s.address.PostIndex},\n" +
                     $"Street: {s.address.Street},\n Contact\nPhone: {s.contact.Phone},\nEmail: {s.contact.Email}");
                     Console.ForegroundColor = color;
-
-
-                }
+                }               
 
             }
         }

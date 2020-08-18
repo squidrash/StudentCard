@@ -1,6 +1,6 @@
 ﻿using System;
 namespace Student
-{
+{    
     public class StudentDTO
     {
         public string FIO { get; set; }
@@ -27,4 +27,5 @@ namespace Student
         public long Phone { get; set; }
         public string Email { get; set; }
     }
+    
 }

@@ -10,10 +10,10 @@ namespace Student
         {
             var filePath = Path.Combine("StudentCards", js); // объединение составных частей в единый путь с автоматическим разделением /
             FileInfo fileInf = new FileInfo(filePath);
-            if(fileInf.Exists)
+            if (fileInf.Exists)
             {
                 var jsonText = File.ReadAllText(filePath);
-                
+
                 var studentDTO = JsonSerializer.Deserialize<StudentDTO>(jsonText);
                 return studentDTO;
                 //Console.WriteLine($"FIO: {studentDTO.FIO},\n Curriculum\nFaculty: {studentDTO.curriculum.Faculty},\nSpeciality: {studentDTO.curriculum.Speciality},\n" +
