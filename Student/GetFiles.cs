@@ -10,7 +10,7 @@ namespace Student
     {
         List<StudentDTO> studentF = new List<StudentDTO>();
         string dirName = "StudentCards";
-        public IEnumerable<string> Files()
+        public IEnumerable<string> GetAllFiles()
         {            
             if (Directory.Exists(dirName))
             {
@@ -25,7 +25,7 @@ namespace Student
                 throw new Exception("Несуществует");
             }
         }
-        public List<StudentDTO> Files2()
+        public List<StudentDTO> ReadAllFiles()
         {
             if (Directory.Exists(dirName))
             {
@@ -47,6 +47,27 @@ namespace Student
             {
                 throw new Exception();
             }
+        }
+        public StudentDTO GetStudentInfo(string js)
+        {
+            var filePath = Path.Combine(dirName, js); // объединение составных частей в единый путь с автоматическим разделением /
+            FileInfo fileInf = new FileInfo(filePath);
+            if (fileInf.Exists)
+            {
+                var jsonText = File.ReadAllText(filePath);
+
+                var studentDTO = JsonSerializer.Deserialize<StudentDTO>(jsonText);
+                return studentDTO;
+                //Console.WriteLine($"FIO: {studentDTO.FIO},\n Curriculum\nFaculty: {studentDTO.curriculum.Faculty},\nSpeciality: {studentDTO.curriculum.Speciality},\n" +
+                //$"Course: {studentDTO.curriculum.Course},\nGpoup: {studentDTO.curriculum.Group},\n Address\nCity: {studentDTO.address.City},\nPostIndex: {studentDTO.address.PostIndex},\n" +
+                //$"Street: {studentDTO.address.Street},\n Contact\nPhone: {studentDTO.contact.Phone},\nEmail: {studentDTO.contact.Email}");
+
+            }
+            else
+            {
+                throw new Exception("Файл не существует!");
+            }
+
         }
     }
 }

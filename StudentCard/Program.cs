@@ -14,12 +14,16 @@ namespace StudentCard
             {
                 try
                 {                    
-                    ConsoleColor color = Console.ForegroundColor;
-                    Console.ForegroundColor = ConsoleColor.Red;
+                    ConsoleColor color_ = Console.ForegroundColor;
+                    ConsoleColor colorR = ConsoleColor.Red;
+                    ConsoleColor colorG = ConsoleColor.Green;
+                    ConsoleColor colorB = ConsoleColor.Blue;
+
+                    Console.ForegroundColor = colorR;                    
                     Console.WriteLine("Список команд:");
-                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.ForegroundColor = colorG;
                     Console.WriteLine("1. Cписок студентов\t2. Информация о студенте\t3. Редактировать\t99. Выход из программы");
-                    Console.ForegroundColor = color;
+                    Console.ForegroundColor = color_;
                     int op = Convert.ToInt32(Console.ReadLine());
 
 
@@ -42,21 +46,27 @@ namespace StudentCard
                     }
                     void Operation1()
                     {
-                        var f = file.Files();
-                        Console.ForegroundColor = ConsoleColor.Green;
+                        var f = file.GetAllFiles();
+                        Console.ForegroundColor = colorB;
                         foreach (var r in f)
                         {
                             Console.WriteLine(r);
                         }
-                        Console.ForegroundColor = ConsoleColor.Red;
 
-                        Console.WriteLine("Отфильтровать по:\n1. Факультету\n2. Специальности\n3. Курсу\n4. Группе");
+                        Console.ForegroundColor = colorR;
+                        Console.WriteLine("Отфильтровать по:");
+
+                        Console.ForegroundColor = colorG;
+                        Console.WriteLine("1. Факультету\n2. Специальности\n3. Курсу\n4. Группе");
+
+                        Console.ForegroundColor = color_;
                         int command = Convert.ToInt32(Console.ReadLine());
-                        Console.ForegroundColor = ConsoleColor.Blue;
+
+                        Console.ForegroundColor = colorB;
                         if (command == 3)
                         {
                             Filter<int> filter = new Filter<int>();                            
-                            var resultF = filter.Filter1(command);
+                            var resultF = filter.FSCGFilter(command);
                             foreach (var r in resultF)
                                 Console.WriteLine(r);
                             
@@ -64,14 +74,14 @@ namespace StudentCard
                         else
                         {
                             Filter<string> filter = new Filter<string>();                            
-                            var resultF = filter.Filter1(command);
+                            var resultF = filter.FSCGFilter(command);
                             foreach (var r in resultF)
                                 Console.WriteLine(r);                            
                         }
-                        Console.ForegroundColor = color;
-                        var select = Console.ReadLine();
-                        Filter<string> filter1 = new Filter<string>();
-                        filter1.FilterResult<string>(select);
+                        Console.ForegroundColor = color_;
+                        //var select = Console.ReadLine();
+                        //Filter<string> filter1 = new Filter<string>();
+                        //filter1.FilterResult<string>(select);
 
                         //Console.ForegroundColor = ConsoleColor.Blue;
                         //var resultF = filter.Filter1(command);
@@ -84,22 +94,23 @@ namespace StudentCard
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Выберите студента:");
-                        var f = file.Files();
+                        var f = file.GetAllFiles();
                         Console.ForegroundColor = ConsoleColor.Green;
                         foreach (var r in f)
                         {
                             Console.WriteLine(r);
                         }
-                        Console.ForegroundColor = color;
+                        Console.ForegroundColor = color_;
 
                         string st = Console.ReadLine();
 
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        var s = student.GetStudentInfo($"{st}.json");
+                        Console.ForegroundColor = colorB;
+                        var s = file.GetStudentInfo($"{st}.json");
+                        //var s = student.GetStudentInfo($"{st}.json");
                         Console.WriteLine($"FIO: {s.FIO},\n Curriculum\nFaculty: {s.curriculum.Faculty},\nSpeciality: {s.curriculum.Speciality},\n" +
                         $"Course: {s.curriculum.Course},\nGpoup: {s.curriculum.Group},\n Address\nCity: {s.address.City},\nPostIndex: {s.address.PostIndex},\n" +
                         $"Street: {s.address.Street},\n Contact\nPhone: {s.contact.Phone},\nEmail: {s.contact.Email}");
-                        Console.ForegroundColor = color;
+                        Console.ForegroundColor = color_;
                     }
                 }
                 catch (Exception e)
