@@ -27,8 +27,7 @@ namespace StudentCard
                     int op = Convert.ToInt32(Console.ReadLine());
 
 
-                    GetFiles file = new GetFiles();
-                    GetStudent student = new GetStudent();
+                    GetFiles file = new GetFiles();                    
 
                     //через if
                     if (op == 1)
@@ -68,8 +67,7 @@ namespace StudentCard
                             Filter<int> filter = new Filter<int>();                            
                             var resultF = filter.FSCGFilter(command);
                             foreach (var r in resultF)
-                                Console.WriteLine(r);
-                            
+                                Console.WriteLine(r);                            
                         }
                         else
                         {
@@ -79,9 +77,10 @@ namespace StudentCard
                                 Console.WriteLine(r);                            
                         }
                         Console.ForegroundColor = color_;
-                        //var select = Console.ReadLine();
-                        //Filter<string> filter1 = new Filter<string>();
-                        //filter1.FilterResult<string>(select);
+                        Console.WriteLine("Введите нужный параметр");
+                        var select = Console.ReadLine();
+                        Filter<string> filter1 = new Filter<string>();
+                        filter1.InvokeFilter<string>(command, select);
 
                         //Console.ForegroundColor = ConsoleColor.Blue;
                         //var resultF = filter.Filter1(command);
