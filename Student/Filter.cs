@@ -38,44 +38,77 @@ namespace Student
                 //        $"Street: {s.address.Street},\n Contact\nPhone: {s.contact.Phone},\nEmail: {s.contact.Email}");
 
                 Console.ForegroundColor = ConsoleColor.Blue;
+                //switch (op)
+                //{
+                //    case 1:
+                //        var uniqueF = from f in studentF
+                //                      group f by new { f.curriculum.Faculty }
+                //                      into mygroup
+                //                      select mygroup.FirstOrDefault();
+                //        foreach (var uF in uniqueF)
+                //            Console.WriteLine(uF.curriculum.Faculty);
+                //        break;
+                //    case 2:
+                //        var uniqueS = from s in studentF
+                //                      group s by new { s.curriculum.Speciality }
+                //                      into mygroup1
+                //                      select mygroup1.FirstOrDefault();
+                //        foreach (var uS in uniqueS)
+                //            Console.WriteLine(uS.curriculum.Speciality);
+                //        break;
+                //    case 3:
+                //        var uniqueC = from c in studentF
+                //                      group c by new { c.curriculum.Course }
+                //                      into mygroup2
+                //                      select mygroup2.FirstOrDefault();
+                //        foreach (var uC in uniqueC)
+                //            Console.WriteLine(uC.curriculum.Course);
+                //        break;
+                //    case 4:
+                //        var uniqueG = from g in studentF
+                //                      group g by new { g.curriculum.Group }
+                //                      into mygroup3
+                //                      select mygroup3.FirstOrDefault();
+                //        foreach (var uG in uniqueG)
+                //            Console.WriteLine(uG.curriculum.Group);
+                //        break;
+                //    default:
+                //        throw new Exception("Неверная команда!");
+                //}
+
                 switch (op)
                 {
                     case 1:
-                        var uniqueF = from f in studentF
-                                      group f by new { f.curriculum.Faculty }
-                                      into mygroup
-                                      select mygroup.FirstOrDefault();
+                        var uniqueF = studentF
+                            .Select(x => x.curriculum.Faculty).Distinct()
+                            .OrderBy(x => x);
                         foreach (var uF in uniqueF)
-                            Console.WriteLine(uF.curriculum.Faculty);
+                            Console.WriteLine(uF);
                         break;
                     case 2:
-                        var uniqueS = from s in studentF
-                                      group s by new { s.curriculum.Speciality }
-                                      into mygroup1
-                                      select mygroup1.FirstOrDefault();
+                        var uniqueS = studentF
+                            .Select(x => x.curriculum.Speciality).Distinct()
+                            .OrderBy(x => x);
                         foreach (var uS in uniqueS)
-                            Console.WriteLine(uS.curriculum.Speciality);
+                            Console.WriteLine(uS);
                         break;
                     case 3:
-                        var uniqueC = from c in studentF
-                                      group c by new { c.curriculum.Course }
-                                      into mygroup2
-                                      select mygroup2.FirstOrDefault();
+                        var uniqueC = studentF
+                            .Select(x => x.curriculum.Course).Distinct()
+                            .OrderBy(x => x);
                         foreach (var uC in uniqueC)
-                            Console.WriteLine(uC.curriculum.Course);
+                            Console.WriteLine(uC);
                         break;
                     case 4:
-                        var uniqueG = from g in studentF
-                                      group g by new { g.curriculum.Group }
-                                      into mygroup3
-                                      select mygroup3.FirstOrDefault();
+                        var uniqueG = studentF
+                            .Select(x => x.curriculum.Group).Distinct()
+                            .OrderBy(x => x);
                         foreach (var uG in uniqueG)
-                            Console.WriteLine(uG.curriculum.Group);
+                            Console.WriteLine(uG);
                         break;
-                    default:
-                        throw new Exception("Неверная команда!");
-                }
 
+                }
+                
             }
         }
     }
