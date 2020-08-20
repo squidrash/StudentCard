@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace Student
 {
     public class GetFiles
     {
+        List<StudentDTO> studentF = new List<StudentDTO>();
+        string dirName = "StudentCards";
         public IEnumerable<string> Files()
-        {
-            string dirName = "StudentCards";
+        {            
             if (Directory.Exists(dirName))
             {
                 var files = Directory.GetFiles(dirName)
@@ -23,6 +25,8 @@ namespace Student
                 throw new Exception("Несуществует");
             }
         }
+        
+
         
     }
 

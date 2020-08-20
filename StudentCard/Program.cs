@@ -48,12 +48,37 @@ namespace StudentCard
                         {
                             Console.WriteLine(r);
                         }
-                        Console.ForegroundColor = color;
+                        Console.ForegroundColor = ConsoleColor.Red;
 
                         Console.WriteLine("Отфильтровать по:\n1. Факультету\n2. Специальности\n3. Курсу\n4. Группе");
                         int command = Convert.ToInt32(Console.ReadLine());
-                        Filter filter = new Filter();
-                        filter.Filter1(command);
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        if (command == 3)
+                        {
+                            Filter<int> filter = new Filter<int>();                            
+                            var resultF = filter.Filter1(command);
+                            foreach (var r in resultF)
+                                Console.WriteLine(r);
+                            
+                        }
+                        else
+                        {
+                            Filter<string> filter = new Filter<string>();                            
+                            var resultF = filter.Filter1(command);
+                            foreach (var r in resultF)
+                                Console.WriteLine(r);                            
+                        }
+                        Console.ForegroundColor = color;
+                        var select = Console.ReadLine();
+                        Filter<string> filter1 = new Filter<string>();
+                        filter1.FilterResult<string>(select);
+
+                        //Console.ForegroundColor = ConsoleColor.Blue;
+                        //var resultF = filter.Filter1(command);
+                        //foreach (var r in resultF)
+                        //    Console.WriteLine(r);
+                        //Console.ForegroundColor = color;
+
                     }
                     void Operation2()
                     {
