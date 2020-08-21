@@ -2,7 +2,7 @@
 using Student;
 using System.Threading.Tasks;
 using System.Reflection;
-
+using System.Collections.Generic;
 
 namespace StudentCard
 {
@@ -41,7 +41,7 @@ namespace StudentCard
                     else
                     {
                         Console.WriteLine($"Неверная команда");
-                        //throw new Exception("Неверная команда");
+                        throw new Exception();
                     }
                     void Operation1()
                     {
@@ -76,18 +76,41 @@ namespace StudentCard
                             foreach (var r in resultF)
                                 Console.WriteLine(r);                            
                         }
-                        Console.ForegroundColor = color_;
+                        Console.ForegroundColor = colorR;
                         Console.WriteLine("Введите нужный параметр");
+                        Console.ForegroundColor = color_;
                         var select = Console.ReadLine();
                         Filter<string> filter1 = new Filter<string>();
-                        filter1.InvokeFilter<string>(command, select);
 
-                        //Console.ForegroundColor = ConsoleColor.Blue;
-                        //var resultF = filter.Filter1(command);
-                        //foreach (var r in resultF)
-                        //    Console.WriteLine(r);
-                        //Console.ForegroundColor = color;
-
+                        IEnumerable<StudentDTO> result = null;
+                        switch (op)
+                        {
+                            case 1:
+                                result = filter1.FilterF(select);
+                                break;
+                            case 2:
+                                 result = filter1.FilterS(select);
+                                break;
+                            case 3:
+                                filter1.FilterC(select);
+                                break;
+                            case 4:
+                                filter1.FilterG(select);
+                                break;
+                            default:
+                                throw new Exception();
+                        }
+                        
+                        Console.ForegroundColor = colorB;
+                        foreach(var g in result)
+                        {
+                            Console.WriteLine();
+                            Console.WriteLine($"FIO: {g.FIO},\n Curriculum\nFaculty: {g.curriculum.Faculty},\nSpeciality: {g.curriculum.Speciality},\n" +
+                            $"Course: {g.curriculum.Course},\nGpoup: {g.curriculum.Group},\n Address\nCity: {g.address.City},\nPostIndex: {g.address.PostIndex},\n" +
+                            $"Street: {g.address.Street},\n Contact\nPhone: {g.contact.Phone},\nEmail: {g.contact.Email}");
+                            Console.WriteLine();
+                        }
+                        Console.ForegroundColor = color_;
                     }
                     void Operation2()
                     {

@@ -39,58 +39,34 @@ namespace Student
                 }            
                 
         }
-        public void InvokeFilter (int op, string s)
-        {
-            switch(op)
-            {
-                case 1:
-                    FilterF(s);
-                    break;
-                case 2:
-                    FilterS(s);
-                    break;
-                case 3:
-                    FilterC(s);
-                    break;
-                case 4:
-                    FilterG(s);
-                    break;
-            }
-
-        }
-        public void FilterF(string s)
-        { }
-        public void FilterS(string s)
-        { }
-        public void FilterC(string s)
+        
+        public IEnumerable<StudentDTO> FilterF(string s)
         {
             var sss = files.ReadAllFiles();
-            switch(s)
-            {
-                case "2":
-                    var result = sss.Where(x => x.curriculum.Course == 2);
-                    foreach (var b in result)
-                        //Console.WriteLine(b);
-                        Console.WriteLine($"FIO: {b.FIO},\n Curriculum\nFaculty: {b.curriculum.Faculty},\nSpeciality: {b.curriculum.Speciality},\n" +
-                        $"Course: {b.curriculum.Course},\nGpoup: {b.curriculum.Group},\n Address\nCity: {b.address.City},\nPostIndex: {b.address.PostIndex},\n" +
-                        $"Street: {b.address.Street},\n Contact\nPhone: {b.contact.Phone},\nEmail: {b.contact.Email}");
-                    break;
-                case "4":
-                    result = sss.Where(x => x.curriculum.Course == 4);
-                    foreach (var b in result)
-                    //Console.WriteLine(b);
-                    {
-                        Console.WriteLine($"FIO: {b.FIO},\n Curriculum\nFaculty: {b.curriculum.Faculty},\nSpeciality: {b.curriculum.Speciality},\n" +
-                          $"Course: {b.curriculum.Course},\nGpoup: {b.curriculum.Group},\n Address\nCity: {b.address.City},\nPostIndex: {b.address.PostIndex},\n" +
-                          $"Street: {b.address.Street},\n Contact\nPhone: {b.contact.Phone},\nEmail: {b.contact.Email}");
-                        Console.WriteLine();
-                    }
-
-                    break;
-
-            }
+            var faculty = s;
+            var result = sss.Where(x => x.curriculum.Faculty == faculty);
+            return result;
         }
-        public void FilterG(string s)
-        { }
+        public IEnumerable<StudentDTO> FilterS(string s)
+        {
+            var sss = files.ReadAllFiles();
+            var speciality = s;
+            var result = sss.Where(x => x.curriculum.Speciality == speciality);
+            return result;
+        }
+        public IEnumerable<StudentDTO> FilterC(string s)
+        {
+            var sss = files.ReadAllFiles();
+            var courseNumber = Int32.Parse(s);
+            var result = sss.Where(x => x.curriculum.Course == courseNumber);
+            return result;
+        }
+        public IEnumerable<StudentDTO> FilterG(string s)
+        {
+            var sss = files.ReadAllFiles();
+            var group = s;
+            var result = sss.Where(x => x.curriculum.Group == group);
+            return result;
+        }
     }
 }
