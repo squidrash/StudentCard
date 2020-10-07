@@ -33,8 +33,7 @@ namespace Student
                     .Where(x => x.EndsWith(".json"))
                     .Select(x => x.Replace("StudentCards/", ""));
                 foreach (var file in files)
-                {
-                    //Console.WriteLine(f);
+                {                    
                     var path = Path.Combine("StudentCards", $"{file}");
 
                     var jsonString = File.ReadAllText(path);
@@ -58,10 +57,6 @@ namespace Student
 
                 var studentDTO = JsonSerializer.Deserialize<StudentDTO>(jsonText);
                 return studentDTO;
-                //Console.WriteLine($"FIO: {studentDTO.FIO},\n Curriculum\nFaculty: {studentDTO.curriculum.Faculty},\nSpeciality: {studentDTO.curriculum.Speciality},\n" +
-                //$"Course: {studentDTO.curriculum.Course},\nGpoup: {studentDTO.curriculum.Group},\n Address\nCity: {studentDTO.address.City},\nPostIndex: {studentDTO.address.PostIndex},\n" +
-                //$"Street: {studentDTO.address.Street},\n Contact\nPhone: {studentDTO.contact.Phone},\nEmail: {studentDTO.contact.Email}");
-
             }
             else
             {
