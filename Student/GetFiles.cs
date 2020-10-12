@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace Student
 {
@@ -37,7 +37,7 @@ namespace Student
                     var path = Path.Combine("StudentCards", $"{file}");
 
                     var jsonString = File.ReadAllText(path);
-                    var student = JsonSerializer.Deserialize<StudentDTO>(jsonString);
+                    var student = JsonConvert.DeserializeObject<StudentDTO>(jsonString);
                     studentF.Add(student);
                 }
                 return studentF;
@@ -55,7 +55,7 @@ namespace Student
             {
                 var jsonText = File.ReadAllText(filePath);
 
-                var studentDTO = JsonSerializer.Deserialize<StudentDTO>(jsonText);
+                var studentDTO = JsonConvert.DeserializeObject<StudentDTO>(jsonText);
                 return studentDTO;
             }
             else

@@ -3,13 +3,19 @@ namespace Student
 {    
     public class StudentDTO
     {
+        public StudentDTO()
+        {
+            Curriculum = new Curriculum();
+            Address = new Address();
+            Contact = new Contacts();
+        }
         public string FIO { get; set; }
-        public Сurriculum curriculum { get; set; }
-        public Address address { get; set; }
-        public Contacts contact { get; set; }
+        public Curriculum Curriculum { get; set; }
+        public Address Address { get; set; }
+        public Contacts Contact { get; set; }
     }
 
-    public class Сurriculum
+    public class Curriculum
     {
         public string Faculty { get; set; }
         public string Speciality { get; set; }

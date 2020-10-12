@@ -9,16 +9,6 @@
     <ProjectReference Include="..\Student\Student.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="StudentCards\" />
-    <Folder Include="StudentCards\ivan.json" />
-  </ItemGroup>
-  <ItemGroup>
     <None Remove="StudentCards\ivan.json" />
-    <None Remove="StudentCards\nik.json" />
-    <None Remove="StudentCards\student.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="StudentCards\nik.json" />
-    <Content Include="StudentCards\student.json" />
   </ItemGroup>
 </Project>

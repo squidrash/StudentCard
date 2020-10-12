@@ -19,9 +19,7 @@ namespace StudentCard
             while (true)
             {
                 try
-                {                    
-                    
-
+                {   
                     Console.ForegroundColor = colorR;                    
                     Console.WriteLine("Список команд:");
                     Console.ForegroundColor = colorG;
@@ -30,7 +28,8 @@ namespace StudentCard
                     int command = Convert.ToInt32(Console.ReadLine());
 
 
-                    GetFiles file = new GetFiles();                    
+                    GetFiles file = new GetFiles();
+                    ActionsWithFiles AWF = new ActionsWithFiles();
 
                     //через if
                     if (command == 1)
@@ -43,7 +42,6 @@ namespace StudentCard
                     }
                     else if (command == 3)
                     {
-                        ActionsWithFiles AWF = new ActionsWithFiles();
                         AWF.AddStudent();
                     }
                     else
@@ -92,7 +90,7 @@ namespace StudentCard
                         Filter<string> filter1 = new Filter<string>();
 
                         //попытка сделать словарь
-                        Dictionary<int, Func<string, IEnumerable<StudentDTO>>> filterDic = new Dictionary<int, Func<string, IEnumerable<StudentDTO>>>
+                        var filterDic = new Dictionary<int, Func<string, IEnumerable<StudentDTO>>>
                         {
                             { 1, filter1.FilterF },
                             { 2, filter1.FilterS },
@@ -106,9 +104,7 @@ namespace StudentCard
                         foreach ( var g in filtrationResult)
                         {
                             Console.WriteLine();
-                            Console.WriteLine($"FIO: {g.FIO},\n Curriculum\nFaculty: {g.curriculum.Faculty},\nSpeciality: {g.curriculum.Speciality},\n" +
-                            $"Course: {g.curriculum.Course},\nGpoup: {g.curriculum.Group},\n Address\nCity: {g.address.City},\nPostIndex: {g.address.PostIndex},\n" +
-                            $"Street: {g.address.Street},\n Contact\nPhone: {g.contact.Phone},\nEmail: {g.contact.Email}");                            
+                            OutputConsole(g);           
                         }
                         Console.ForegroundColor = color_;  
                     }
@@ -124,15 +120,27 @@ namespace StudentCard
                         }
                         Console.ForegroundColor = color_;
 
-                        string st = Console.ReadLine();
+                        string studentName = Console.ReadLine();
 
                         Console.ForegroundColor = colorB;
-                        var s = file.GetStudentInfo($"{st}.json");
-                        //var s = student.GetStudentInfo($"{st}.json");
-                        Console.WriteLine($"FIO: {s.FIO},\n Curriculum\nFaculty: {s.curriculum.Faculty},\nSpeciality: {s.curriculum.Speciality},\n" +
-                        $"Course: {s.curriculum.Course},\nGpoup: {s.curriculum.Group},\n Address\nCity: {s.address.City},\nPostIndex: {s.address.PostIndex},\n" +
-                        $"Street: {s.address.Street},\n Contact\nPhone: {s.contact.Phone},\nEmail: {s.contact.Email}");
+                        // как лучше назвать переменную s?
+                        var s = file.GetStudentInfo($"{studentName}.json");
+                        OutputConsole(s);
                         Console.ForegroundColor = color_;
+
+                        Console.WriteLine("Отредактировать?");
+                        var editStudent = Console.ReadLine().ToLower();
+                        if(editStudent == "да")
+                        {
+                            var llll = AWF.EditStudent(s);
+                            OutputConsole(llll);
+                        } 
+                    }
+                    void OutputConsole(StudentDTO s)
+                    {
+                        Console.WriteLine($"FIO: {s.FIO},\n Curriculum\nFaculty: {s.Curriculum.Faculty},\nSpeciality: {s.Curriculum.Speciality},\n" +
+                        $"Course: {s.Curriculum.Course},\nGpoup: {s.Curriculum.Group},\n Address\nCity: {s.Address.City},\nPostIndex: {s.Address.PostIndex},\n" +
+                        $"Street: {s.Address.Street},\n Contact\nPhone: {s.Contact.Phone},\nEmail: {s.Contact.Email}");
                     }
                 }
                 catch (Exception e)
